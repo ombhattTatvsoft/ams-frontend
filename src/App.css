@@ -1,0 +1,34 @@
+.links,
+.links:hover {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.sitebgcolor,
+.sitebgcolor:hover {
+  background-color: black !important;
+  color: white !important;
+}
+
+.siteoutlinebtn,
+.siteoutlinebtn:hover {
+  background-color: white !important;
+  border: 1px solid black !important;
+  border-radius: 5px;
+  color: black !important;
+}
+
+.main-div {
+  transition: 0.75s;
+}
+
+@media (min-width:992px) {
+  .main-margin {
+    margin-left: 250px;
+  }
+}
+
+.warning-icon{
+  height: 60px;
+}
