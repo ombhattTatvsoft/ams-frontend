@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import {
   getAccessToken,
   removeAccessToken,
@@ -10,19 +9,18 @@ import {
   removeUserData,
   setUserData,
 } from "../../utils/manageUserData";
+import { toast } from 'react-toastify';
+import { GENERAL } from "../../constants/general";
+import authApi from "./authApi";
 
 // Async thunk for login
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5131/api/auth/login",
-        credentials
-      );
-      return response.data;
+      return await authApi.login(credentials);
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err);
     }
   }
 );
@@ -32,39 +30,32 @@ export const forgotPassword = createAsyncThunk(
   "auth/forgotPassword",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5131/api/auth/forgot-password",
-        credentials
-      );
-      return response.data;
+      return await authApi.forgotPassword(credentials);
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err);
     }
   }
 );
 
-// Async thunk for forgot password
+// Async thunk for reset password
 export const resetPassword = createAsyncThunk(
   "auth/resetPassword",
   async (credentials, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        "http://localhost:5131/api/auth/reset-password",
-        credentials
-      );
-      return response.data;
+      return await authApi.resetPassword(credentials);
     } catch (err) {
-      return rejectWithValue(err.response.data);
+      return rejectWithValue(err);
     }
   }
 );
+
+// auth slice with action and reducers
 
 const authSlice = createSlice({
   name: "auth",
   initialState: {
     isAuthenticated: getAccessToken() && getUserData() ? true : false,
     loading: false,
-    error: null,
   },
   reducers: {
     logout: (state) => {
@@ -72,44 +63,56 @@ const authSlice = createSlice({
       state.error = null;
       removeUserData();
       removeAccessToken();
+      toast.success(GENERAL.LOGOUT_SUCCESS)
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(loginUser.pending,(state)=>{
+        state.loading = true;
+      })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
-        storeAccessToken(action.payload.token, action.meta.arg.rememberme);
-        setUserData(JSON.stringify(action.payload.user));
+        storeAccessToken(action.payload.data.token, action.meta.arg.rememberme);
+        setUserData(JSON.stringify(action.payload.data.user));
+        toast.success(action.payload.message);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message || 'Login Failed';
+        toast.error(action.payload.message);
+      })
+      .addCase(forgotPassword.pending,(state)=>{
+        state.loading = true;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload.message);
+        toast.success(action.payload.message);
       })
       .addCase(forgotPassword.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message || 'Forgot Password Failed';
+        toast.error(action.payload.message);
+      })
+      .addCase(resetPassword.pending,(state)=>{
+        state.loading = true;
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.loading = false;
-        console.log(action.payload.message);
+        toast.success(action.payload.message);
+
       })
       .addCase(resetPassword.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload.message || 'Reset Password Failed';
+        toast.error(action.payload?.message);
       })
-      .addMatcher(
-        (action) =>
-          [loginUser.pending, forgotPassword.pending,resetPassword.pending].includes(action.type),
-        (state) => {
-          state.loading = true;
-          state.error = null;
-        }
-      );
+      // .addMatcher(
+      //   (action) =>
+      //     [loginUser.pending, forgotPassword.pending,resetPassword.pending].includes(action.type),
+      //   (state) => {
+      //     state.loading = true;
+      //     state.error = null;
+      //   }
+      // );
   },
 });
 

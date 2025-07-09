@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '../../constants/routes';
-import FormInput from '../../components/common/FormInput';
-import FormButton from '../../components/common/FormButton';
+import FormInput from "../../common/components/FormInput";
+import FormButton from "../../common/components/FormButton";
 import { resetPassword } from './authSlice';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios, { HttpStatusCode } from 'axios';
+import Loader from '../../common/components/Loader';
+import { toast } from 'react-toastify';
+import authApi from './authApi';
 
 function ResetPassword() {
     const {resetcode} = useParams();
     const navigate = useNavigate();
     const [isValid,setIsValid] = useState(null);
     const dispatch = useDispatch();
-    const { isAuthenticated, loading, error } = useSelector(
+    const { isAuthenticated, loading } = useSelector(
       (state) => state.auth
     );
   
@@ -24,20 +26,22 @@ function ResetPassword() {
     useEffect(()=>{
         const validateResetCode = async ()=>{
             try {
-                const response =await axios.get(`http://localhost:5131/api/auth/reset-password/${resetcode}`);
-                if(response.status==HttpStatusCode.Ok){
+                const response = await authApi.getResetPassword(resetcode);
+                if(response.isSuccess){
                     setIsValid(true);
                 }
                 else{
                     navigate(PUBLIC_ROUTES.LOGIN);
                 }
             } catch (error) {
-                console.log(error);
+                toast.error(error.message);
                 navigate(PUBLIC_ROUTES.LOGIN);
             }       
         }
         validateResetCode();
     },[navigate, resetcode])
+
+    if (isAuthenticated) return <Navigate to={PRIVATE_ROUTES.DASHBOARD} />;
 
     if(isValid==null)
         return(
@@ -49,9 +53,9 @@ function ResetPassword() {
       dispatch(resetPassword(form));
     };
   
-    if (isAuthenticated) return <Navigate to={PRIVATE_ROUTES.DASHBOARD} />;
   return (
     <>
+        {loading && <Loader/>}
         <h4 className="mb-4">Reset Password</h4>
         <div className="col-10 mb-4">
             <form onSubmit={handleSubmit}>
@@ -68,7 +72,6 @@ function ResetPassword() {
             label="Confirm New Password"
           ></FormInput>
           <FormButton className="w-100 sitebgcolor" type="submit">{loading ? "Sending..." : "Send"}</FormButton>
-          {error && <p className="text-danger">{error}</p>}
             </form>
         </div>
     </>

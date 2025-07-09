@@ -1,10 +1,10 @@
 import React from "react";
-import warningIcon from "../assets/images/toppng.com-warning-icon-2400x2400.png";
+import warningIcon from "../../assets/images/toppng.com-warning-icon-2400x2400.png";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../features/auth/authSlice";
-import FormButton from "./common/FormButton";
-import { PUBLIC_ROUTES } from "../constants/routes";
+import { logout } from "../../features/auth/authSlice";
+import FormButton from "./FormButton";
+import { PUBLIC_ROUTES } from "../../constants/routes";
 import { Modal } from "react-bootstrap";
 
 function LogoutModal({showModal,setShowModal}) {

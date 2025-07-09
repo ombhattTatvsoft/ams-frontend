@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/images/AMS_logo_2.png"
+import logo from "../../assets/images/AMS_logo_2.png"
 
 function AMSLogo({height}) {
   return (

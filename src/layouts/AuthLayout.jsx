@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import AMSLogo from "../components/AMSLogo";
+import AMSLogo from "../common/components/AMSLogo";
 
 function AuthLayout() {
   return (

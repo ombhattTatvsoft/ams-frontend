@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import defaultPfp from "../assets/images/Default_pfp.svg.png";
+import defaultPfp from "../../assets/images/Default_pfp.svg.png";
 import { Link } from "react-router-dom";
-import { PRIVATE_ROUTES } from "../constants/routes";
+import { PRIVATE_ROUTES } from "../../constants/routes";
 import { Dropdown } from "react-bootstrap";
-import { getUserData } from "../utils/manageUserData";
+import { getUserData } from "../../utils/manageUserData";
 import LogoutModal from "./LogoutModal";
 
-function UserProfile() {
+function ProlfileDropdown() {
 
   const [showModal, setShowModal] = useState(false);
   const user = getUserData();
@@ -68,4 +68,4 @@ function UserProfile() {
   );
 }
 
-export default UserProfile;
+export default ProlfileDropdown;

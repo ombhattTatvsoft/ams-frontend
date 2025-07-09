@@ -1,6 +1,6 @@
 import React from "react";
 import AMSLogo from "./AMSLogo";
-import UserProfile from "./UserProfile";
+import ProfileDropdown from "./ProfileDropdown";
 
 function NavBar() {
   return (
@@ -19,7 +19,7 @@ function NavBar() {
             onclick="toggleSidebar()"
           ></i> */}
         </div>
-        <UserProfile/>
+        <ProfileDropdown/>
       </div>
     </nav>
   );
