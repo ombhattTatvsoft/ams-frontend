@@ -1,6 +1,5 @@
 import React from "react";
 import warningIcon from "../../assets/images/toppng.com-warning-icon-2400x2400.png";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import FormButton from "./FormButton";
@@ -9,7 +8,6 @@ import { Modal } from "react-bootstrap";
 
 function LogoutModal({showModal,setShowModal}) {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
   return (
     <Modal
       show={showModal}
@@ -29,7 +27,7 @@ function LogoutModal({showModal,setShowModal}) {
           <FormButton
             className="sitebgcolor"
             onClick={() => {
-              dispatch(logout()), navigate(PUBLIC_ROUTES.LOGIN);
+              dispatch(logout());
             }}
           >
             Yes

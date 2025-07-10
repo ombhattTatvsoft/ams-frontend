@@ -1,10 +1,11 @@
 import React from "react";
 
-function FormCheckBox({checked=false,onChange,label,id}) {
+function FormCheckBox({checked=false,onChange,label,id,name}) {
   return (
     <div className="d-flex px-1">
       <input
         id={id}
+        name={name}
         type="checkbox"
         className="form-check-input"
         checked={checked}

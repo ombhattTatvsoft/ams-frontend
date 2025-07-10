@@ -1,23 +1,65 @@
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 import { GENERAL } from "../../constants/general";
+import {
+  getAccessToken,
+  removeAccessToken,
+} from "../../utils/manageAccessToken";
+import { PUBLIC_ROUTES } from "../../constants/routes";
+import { removeUserData } from "../../utils/manageUserData";
+import { navigateTo } from "../navigate";
 
 const baseUrl = "http://localhost:5131/api";
 
-const baseApi = async ({ method, endPoint, data, headers = {} }) => {
-  try {
-    const response = await axios({
-      method,
-      url: baseUrl+endPoint,
-      data,
-      headers: {
-        "Content-Type": "application/json",
-        ...headers,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw error.response?.data || { message: GENERAL.UNEXPECTED_ERROR };
+// Create Axios instance
+const api = axios.create({
+  baseURL: baseUrl,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Request interceptor to add Authorization header dynamically
+api.interceptors.request.use(
+  (config) => {
+    const token = getAccessToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+// Response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response.data,
+  (error) => {
+    let message;
+    if (error.response?.status === HttpStatusCode.Unauthorized) {
+      removeAccessToken();
+      removeUserData();
+      navigateTo(PUBLIC_ROUTES.LOGIN);
+      message = GENERAL.SESSION_EXPIRED;
+    }
+    else if(error.response?.status === HttpStatusCode.Forbidden){
+      message = GENERAL.FORBID;
+    }
+    else{
+      message = GENERAL.UNEXPECTED_ERROR;
+    }
+    return Promise.reject(
+      error.response?.data || { message }
+    );
   }
+);
+
+const baseApi = async ({ method, endPoint, data, headers = {} }) => {
+  return await api({
+    method,
+    url: endPoint,
+    data,
+    headers,  
+  });
 };
 
 export default baseApi;
