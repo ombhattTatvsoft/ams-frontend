@@ -1,9 +1,8 @@
 import React from "react";
-import warningIcon from "../../assets/images/toppng.com-warning-icon-2400x2400.png";
+import warningIcon from "../../../assets/images/toppng.com-warning-icon-2400x2400.png";
 import { useDispatch } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
-import FormButton from "./FormButton";
-import { PUBLIC_ROUTES } from "../../constants/routes";
+import { logout } from "../../../features/auth/authSlice";
+import FormButton from "../ui/FormButton";
 import { Modal } from "react-bootstrap";
 
 function LogoutModal({showModal,setShowModal}) {
@@ -19,7 +18,7 @@ function LogoutModal({showModal,setShowModal}) {
       <Modal.Body className="w-75 p-3 mx-auto">
         <div className="d-flex flex-column align-items-center">
           <img src={warningIcon} className="warning-icon" alt="" />
-          <p className="text-body-tertiary mb-0">
+          <p className="h5 mb-0">
             Are you sure you want to Logout?
           </p>
         </div>

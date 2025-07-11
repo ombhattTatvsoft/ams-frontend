@@ -6,7 +6,7 @@ import {
 } from "../../utils/manageAccessToken";
 import { PUBLIC_ROUTES } from "../../constants/routes";
 import { removeUserData } from "../../utils/manageUserData";
-import { navigateTo } from "../navigate";
+import { navigateTo } from "../utils/navigate";
 
 const baseUrl = "http://localhost:5131/api";
 
@@ -48,7 +48,7 @@ api.interceptors.response.use(
       message = GENERAL.UNEXPECTED_ERROR;
     }
     return Promise.reject(
-      error.response?.data || { message }
+      error.response?.data.errors ? {message : Object.values(error.response.data.errors).flat().join(', ')} : (error.response?.data || {message})
     );
   }
 );

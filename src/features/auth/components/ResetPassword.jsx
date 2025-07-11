@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../../../constants/routes";
-import FormInput from "../../common/components/FormInput";
-import FormButton from "../../common/components/FormButton";
+import FormInput from "../../../common/components/ui/FormInput";
+import FormButton from "../../../common/components/ui/FormButton";
 import { resetPassword } from "../authSlice";
 import { useNavigate, useParams } from "react-router-dom";
-import Loader from "../../common/components/Loader";
+import Loader from "../../../common/components/ui/Loader";
 import { toast } from "react-toastify";
 import authApi from "../authApi";
 import { Formik } from "formik";
@@ -40,8 +40,8 @@ function ResetPassword() {
   return (
     <>
       {!isValid && <Loader />}
-      <h4 className="mb-4">Reset Password</h4>
-      <div className="col-10 mb-4">
+      <h3 className="mb-4">Reset Password</h3>
+      <div className="col-10 mb-3">
         <Formik
           initialValues={{
             resetCode: resetcode,

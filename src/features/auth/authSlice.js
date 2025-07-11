@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, isAnyOf } from "@reduxjs/toolkit";
 import {
   getAccessToken,
   removeAccessToken,
@@ -12,7 +12,7 @@ import {
 import { toast } from 'react-toastify';
 import { GENERAL } from "../../constants/general";
 import authApi from "./authApi";
-import { navigateTo } from "../../common/navigate";
+import { navigateTo } from "../../common/utils/navigate";
 import { PUBLIC_ROUTES } from "../../constants/routes";
 
 // Async thunk for login
@@ -70,9 +70,6 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginUser.pending,(state)=>{
-        state.loading = true;
-      })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
         state.isAuthenticated = true;
@@ -80,40 +77,28 @@ const authSlice = createSlice({
         setUserData(JSON.stringify(action.payload.data.user));
         toast.success(action.payload.message);
       })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.loading = false;
-        toast.error(action.payload.errors ? Object.values(action.payload.errors).flat().join(", ") : action.payload.message);
-      })
-      .addCase(forgotPassword.pending,(state)=>{
-        state.loading = true;
-      })
       .addCase(forgotPassword.fulfilled, (state, action) => {
         state.loading = false;
         toast.success(action.payload.message);
-      })
-      .addCase(forgotPassword.rejected, (state, action) => {
-        state.loading = false;
-        toast.error(action.payload.errors ? Object.values(action.payload.errors).flat().join(", ") : action.payload.message);
-      })
-      .addCase(resetPassword.pending,(state)=>{
-        state.loading = true;
       })
       .addCase(resetPassword.fulfilled, (state, action) => {
         state.loading = false;
         toast.success(action.payload.message);
         navigateTo(PUBLIC_ROUTES.LOGIN);
       })
-      .addCase(resetPassword.rejected, (state, action) => {
-        state.loading = false;
-        toast.error(action.payload.errors ? Object.values(action.payload.errors).flat().join(", ") : action.payload.message);
-      })
-      // .addMatcher(
-      //   (action) =>
-      //     [loginUser.pending, forgotPassword.pending,resetPassword.pending].includes(action.type),
-      //   (state) => {
-      //     state.loading = true;
-      //   }
-      // );
+      .addMatcher(
+        isAnyOf(loginUser.pending, forgotPassword.pending,resetPassword.pending),
+        (state)=>{
+          state.loading = true;
+        }
+      )
+      .addMatcher(
+        isAnyOf(loginUser.rejected, forgotPassword.rejected,resetPassword.rejected),
+        (state,action)=>{
+          state.loading = false;
+          toast.error(action.payload.message);
+        }
+      )
   },
 });
 

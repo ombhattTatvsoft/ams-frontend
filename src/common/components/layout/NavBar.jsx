@@ -1,6 +1,6 @@
 import React from "react";
-import AMSLogo from "./AMSLogo";
-import ProfileDropdown from "./ProfileDropdown";
+import AMSLogo from "../ui/AMSLogo";
+import ProfileDropdown from "../layout/ProfileDropdown";
 
 function NavBar() {
   return (

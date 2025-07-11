@@ -1,13 +1,13 @@
 import React from "react";
-import FormInput from "../../common/components/FormInput";
-import FormButton from "../../common/components/FormButton";
+import FormInput from "../../../common/components/ui/FormInput";
+import FormButton from "../../../common/components/ui/FormButton";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../../../constants/routes";
 import { useDispatch, useSelector } from "react-redux";
 import { forgotPassword } from "../authSlice";
-import { Link } from "react-router-dom";
-import Loader from "../../common/components/Loader";
+import Loader from "../../../common/components/ui/Loader";
 import { Formik } from "formik";
 import { forgotPasswordSchema } from "../authSchema";
+import FormLink from "../../../common/components/ui/FormLink";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
@@ -18,8 +18,8 @@ function ForgotPassword() {
   return (
     <>
       {loading && <Loader />}
-      <h4 className="mb-4">Forgot Password</h4>
-      <div className="col-10 mb-4">
+      <h3 className="mb-4">Forgot Password</h3>
+      <div className="col-10 mb-3">
         <p className="text-muted">
           Enter you email and we'll send you a link to reset your password.
         </p>
@@ -39,9 +39,7 @@ function ForgotPassword() {
                 error={touched.email && errors.email}
               ></FormInput>
               <div className="d-flex justify-content-between align-items-center">
-                <Link to={PUBLIC_ROUTES.LOGIN} className="links">
-                  Back to login
-                </Link>
+                <FormLink to={PUBLIC_ROUTES.LOGIN}>Back to login</FormLink>
                 <FormButton className="sitebgcolor" type="submit">
                   {loading ? "Sending..." : "Send"}
                 </FormButton>

@@ -1,13 +1,13 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../features/dashboard/Dashboard";
+import Dashboard from "../features/dashboard/components/Dashboard";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../constants/routes";
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
-import Login from "../features/auth/Login";
-import ForgotPassword from "../features/auth/ForgotPassword";
-import ResetPassword from "../features/auth/ResetPassword";
-import NotFound from "../common/components/NotFound";
+import Login from "../features/auth/components/Login";
+import ForgotPassword from "../features/auth/components/ForgotPassword";
+import ResetPassword from "../features/auth/components/ResetPassword";
+import NotFound from "../common/components/error/NotFound";
 
 export default function AppRoutes() {
   return (

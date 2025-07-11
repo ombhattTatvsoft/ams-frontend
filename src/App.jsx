@@ -3,7 +3,7 @@ import './App.css'
 import AppRoutes from './routes/AppRoutes'
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
-import { setNavigator } from './common/navigate';
+import { setNavigator } from './common/utils/navigate';
 
 function App() {
 
