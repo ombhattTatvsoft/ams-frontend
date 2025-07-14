@@ -8,6 +8,14 @@ export const PUBLIC_ROUTES = {
   export const PRIVATE_ROUTES = {
     DASHBOARD: '/dashboard',
     PROFILE: '/profile',
-    CHANGE_PASSWORD: '/change-password'
+    CHANGE_PASSWORD: '/change-password',
+    USERS : '/users',
+    ATTENDANCE_SELF : 'attendance/self',
+    ATTENDANCE_TEAM : '/attendance/team',
+    LEAVE_TEAM : 'leave/team',
+    LEAVE_SELF : 'leave/self',
+    HOLIDAY : 'holiday/',
+    DEPARTMENT : 'department',
+    REPORT_ANALYTICS : 'report-analytics'
   };
   

@@ -1,71 +1,88 @@
 import React, { useState } from "react";
-import defaultPfp from "../../../assets/images/Default_pfp.svg.png";
 import { Link } from "react-router-dom";
 import { PRIVATE_ROUTES } from "../../../constants/routes";
-import { Dropdown } from "react-bootstrap";
+import {
+  Avatar,
+  IconButton,
+  MenuItem,
+  Divider,
+  Typography,
+} from "@mui/material";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { getUserData } from "../../../utils/manageUserData";
 import LogoutModal from "../modals/LogoutModal";
+import defaultPfp from "../../../assets/images/Default_pfp.svg.png";
+import DropdownMenu from "./../ui/DropdownMenu";
 
-function ProlfileDropdown() {
-
+function ProfileDropdown() {
+  const [anchorEl, setAnchorEl] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const user = getUserData();
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <>
-      <Dropdown className="rounded-circle">
-        <Dropdown.Toggle
-          as="img"
-          src={defaultPfp}
-          className="img-fluid rounded-circle"
-          id="dropdownMenuButton1"
-          style={{ height: "50px", width: "50px", cursor: "pointer" }}
-          alt="Profile"
-        />
-
-        <Dropdown.Menu className="dropdown-menu-end mt-2" align="end">
-          <Dropdown.Item disabled>
-            <span className="text-dark">
-              {user.name} ({user.role})
-            </span>
-          </Dropdown.Item>
-          <hr className="my-1" />
-          <Dropdown.Item
-            as={Link}
-            to={PRIVATE_ROUTES.PROFILE}
-            className="links text-dark"
-          >
-            <img
-              src={defaultPfp}
-              alt=""
-              style={{ height: "20px", width: "20px", cursor: "pointer" }}
-            />
-            <span className="ms-2">My Profile</span>
-          </Dropdown.Item>
-          <Dropdown.Item
-            as={Link}
-            to={PRIVATE_ROUTES.CHANGE_PASSWORD}
-            className="links text-dark"
-          >
-            <i className="fa-solid fa-spinner" style={{ width: "20px" }}></i>
-            <span className="ms-2">Change Password</span>
-          </Dropdown.Item>
-          <Dropdown.Item
-            as="button"
-            onClick={() => setShowModal(true)}
-            className="links text-dark"
-          >
-            <i
-              className="fa-solid fa-right-from-bracket"
-              style={{ width: "20px" }}
-            ></i>
-            <span className="ms-2">Logout</span>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    <LogoutModal showModal={showModal} setShowModal={setShowModal}/>
+      <IconButton
+        onClick={handleClick}
+        sx={{ p: 0 }}
+        aria-controls={open ? "profile-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+      >
+        <Avatar src={defaultPfp} alt="Profile" sx={{ width: 50, height: 50 }} />
+      </IconButton>
+      <DropdownMenu id="profile-menu" anchorEl={anchorEl} handleClose={handleClose} open={open}>
+        <MenuItem disabled>
+          <Typography color="text.primary">
+            {user.name} ({user.role})
+          </Typography>
+        </MenuItem>
+        <Divider sx={{ my: 0.5 }} />
+        <MenuItem
+          component={Link}
+          to={PRIVATE_ROUTES.PROFILE}
+          onClick={handleClose}
+          sx={{ color: "text.primary" }}
+        >
+          <Avatar
+            src={defaultPfp}
+            alt="Profile"
+            sx={{ width: 20, height: 20, mr: 1 }}
+          />
+          My Profile
+        </MenuItem>
+        <MenuItem
+          component={Link}
+          to={PRIVATE_ROUTES.CHANGE_PASSWORD}
+          onClick={handleClose}
+          sx={{ color: "text.primary" }}
+        >
+          <AutorenewIcon sx={{ width: 20, height: 20, mr: 1 }} />
+          Change Password
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setShowModal(true);
+            handleClose();
+          }}
+          sx={{ color: "text.primary" }}
+        >
+          <LogoutIcon sx={{ width: 20, height: 20, mr: 1 }} />
+          Logout
+        </MenuItem>
+      </DropdownMenu>
+      <LogoutModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 }
 
-export default ProlfileDropdown;
+export default ProfileDropdown;

@@ -4,28 +4,24 @@ import baseApi from "../../common/API/BaseAPI";
 
 const authApi = {
   login: (credentials) =>
-    baseApi({
-      method: API_MEHTODS.POST,
+    baseApi.post({
       endPoint: PUBLIC_ROUTES.LOGIN,
       data: credentials
     }),
 
   forgotPassword: (credentials) =>
-    baseApi({
-      method: API_MEHTODS.POST,
+    baseApi.post({
       endPoint: PUBLIC_ROUTES.FORGOT_PASSWORD,
       data: credentials
     }),
 
   getResetPassword: (credentials) =>
-    baseApi({
-      method: API_MEHTODS.GET,
+    baseApi.get({
       endPoint: PUBLIC_ROUTES.RESET_PASSWORD.replace(":resetcode",'')+credentials,
     }),
 
   resetPassword: (credentials) =>
-    baseApi({
-      method: API_MEHTODS.POST,
+    baseApi.post({
       endPoint: PUBLIC_ROUTES.RESET_PASSWORD.replace(":resetcode",''),
       data: credentials
     }),

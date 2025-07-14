@@ -1,27 +1,28 @@
 import React from "react";
 import AMSLogo from "../ui/AMSLogo";
 import ProfileDropdown from "../layout/ProfileDropdown";
+import MenuIcon from "@mui/icons-material/Menu";
 
-function NavBar() {
+function NavBar({handleDrawerToggle}) {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-      <div className="container-fluid d-flex justify-content-between">
-        <div className="d-flex align-items-center">
-          <a className="navbar-brand links">
-            <div className="d-flex align-items-center gap-1">
-              <AMSLogo height="40px"/>
-              AMS
+    <>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div className="container-fluid d-flex justify-content-between">
+          <div className="d-flex align-items-center">
+            <a className="navbar-brand links">
+              <div className="d-flex align-items-center gap-1">
+                <AMSLogo height="40px" />
+                AMS
+              </div>
+            </a>
+            <div className="links">
+              <MenuIcon sx={{ color: "white" }} onClick={handleDrawerToggle}/>
             </div>
-          </a>
-          {/* <i
-            className="bi bi-list fs-4"
-            style={{ color: "white" }}
-            onclick="toggleSidebar()"
-          ></i> */}
+          </div>
+          <ProfileDropdown />
         </div>
-        <ProfileDropdown/>
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 }
 

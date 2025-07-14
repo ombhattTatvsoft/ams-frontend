@@ -1,0 +1,21 @@
+/* sidebar css */
+
+.sidebar-option:hover {
+  background-color: #e9ecef;
+  border-radius: 10px;
+}
+
+.active-option,
+.active-option:hover {
+  background-color: #94c8fc;
+  border-radius: 10px;
+
+  .a {
+    color: white !important;
+  }
+}
+
+.sidebar-icon {
+  font-size: 20px !important;
+  min-width: 30px !important;
+}

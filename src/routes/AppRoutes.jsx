@@ -8,6 +8,7 @@ import Login from "../features/auth/components/Login";
 import ForgotPassword from "../features/auth/components/ForgotPassword";
 import ResetPassword from "../features/auth/components/ResetPassword";
 import NotFound from "../common/components/error/NotFound";
+import User from "../features/users/components/User";
 
 export default function AppRoutes() {
   return (
@@ -27,6 +28,7 @@ export default function AppRoutes() {
       <Route element={<PrivateRoute />}>
         <Route element={<MainLayout />}>
           <Route path={PRIVATE_ROUTES.DASHBOARD} element={<Dashboard />} />
+          <Route path={PRIVATE_ROUTES.USERS} element={<User />} />
         </Route>
       </Route>
       <Route element={<AuthLayout />}>

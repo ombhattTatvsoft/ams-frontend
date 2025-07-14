@@ -53,13 +53,11 @@ api.interceptors.response.use(
   }
 );
 
-const baseApi = async ({ method, endPoint, data, headers = {} }) => {
-  return await api({
-    method,
-    url: endPoint,
-    data,
-    headers,  
-  });
-};
+const baseApi = {
+  get : async({endPoint,params}) => await api.get(endPoint,params),
+  post : async({endPoint,data}) => await api.post(endPoint,data),
+  put : async({endPoint,data}) => await api.put(endPoint,data),
+  delete : async({endPoint,params}) => await api.delete(endPoint,params),
+}
 
 export default baseApi;
