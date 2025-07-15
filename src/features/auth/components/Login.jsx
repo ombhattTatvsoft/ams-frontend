@@ -59,7 +59,7 @@ export default function Login() {
                   Forgot Password?
                 </FormLink>
               </div>
-              <FormButton className="w-100 sitebgcolor" type="submit">
+              <FormButton className="w-100 sitebgcolor mb-1" type="submit">
                 {loading ? "Logging in..." : "Login"}
               </FormButton>
             </form>

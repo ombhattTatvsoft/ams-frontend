@@ -1,12 +1,12 @@
 import React from "react";
 
-const Dashboard = () => {
+const Profile = () => {
   return (
     <>
       <div class="content">
         <div class="row">
           <div class="col-sm-6">
-            <h3>Dashboard</h3>
+            <h3>My Profile</h3>
           </div>
         </div>
       </div>
@@ -14,4 +14,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Profile;

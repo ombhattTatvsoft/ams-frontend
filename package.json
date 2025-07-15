@@ -18,6 +18,8 @@
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
+    "datatables.net-dt": "^2.3.2",
+    "datatables.net-react": "^1.0.1",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.5",
     "react": "^19.1.0",

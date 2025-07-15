@@ -1,4 +1,3 @@
-import API_MEHTODS from "../../constants/apiMethods";
 import { PUBLIC_ROUTES } from "../../constants/routes";
 import baseApi from "../../common/API/BaseAPI";
 

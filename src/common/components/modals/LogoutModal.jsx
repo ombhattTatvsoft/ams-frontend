@@ -15,7 +15,7 @@ function LogoutModal({ showModal, setShowModal }) {
       </div>
       <div className="d-flex justify-content-center gap-2 mt-3">
         <FormButton
-          className="sitebgcolor"
+          className="sitebgcolor mb-1"
           onClick={() => {
             dispatch(logout());
           }}
@@ -23,7 +23,7 @@ function LogoutModal({ showModal, setShowModal }) {
           Yes
         </FormButton>
         <FormButton
-          className="siteoutlinebtn"
+          className="siteoutlinebtn mb-1"
           onClick={() => setShowModal(false)}
         >
           No

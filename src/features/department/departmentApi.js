@@ -1,0 +1,28 @@
+import baseApi from "../../common/API/BaseAPI";
+import { DEPARTMENT_ENDPOINTS } from "../../constants/endPoint";
+import { PRIVATE_ROUTES } from "../../constants/routes";
+
+export const departmentApi = {
+    GetDepartments:() =>
+        baseApi.get({
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.GetDepartments
+        }),
+
+    GetDepartmentById:(id) =>
+        baseApi.get({
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.GetDepartmentById,
+            params : id
+        }),
+
+    SaveDepartment:(data) =>
+        baseApi.post({
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.SaveDepartment,
+            data : data
+        }),
+
+    DeleteDepartment:(id) => 
+        baseApi.delete({
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.DeleteDepartment,
+            params : id
+        })
+}

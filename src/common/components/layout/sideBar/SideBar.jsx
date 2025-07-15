@@ -47,7 +47,11 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
     >
       <List sx={{p:2}}>
         {/* Dashboard */}
-        <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.DASHBOARD ? 'active-option':'sidebar-option'}>
+        <ListItem disablePadding 
+        className={(location.pathname==PRIVATE_ROUTES.DASHBOARD 
+        || location.pathname==PRIVATE_ROUTES.PROFILE
+        || location.pathname==PRIVATE_ROUTES.CHANGE_PASSWORD
+        ) ? 'active-option':'sidebar-option'}>
           <ListItemButton component={Link} to={PRIVATE_ROUTES.DASHBOARD}>
             <ListItemIcon className='sidebar-icon'><DashboardIcon className='a'/></ListItemIcon>
             <ListItemText primary="Dashboard" className='a'/>

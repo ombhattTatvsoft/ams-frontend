@@ -5,7 +5,6 @@ function FormButton({ className = "", children, disabled = false, ...props }) {
   return (
     <Button
       className={`${className}`}
-      sx={{marginBottom:"1rem"}}
       disabled={disabled}
       {...props}
     >

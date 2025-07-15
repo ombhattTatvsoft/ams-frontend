@@ -40,7 +40,7 @@ function ForgotPassword() {
               ></FormInput>
               <div className="d-flex justify-content-between align-items-center">
                 <FormLink to={PUBLIC_ROUTES.LOGIN}>Back to login</FormLink>
-                <FormButton className="sitebgcolor" type="submit">
+                <FormButton className="sitebgcolor mb-1" type="submit">
                   {loading ? "Sending..." : "Send"}
                 </FormButton>
               </div>

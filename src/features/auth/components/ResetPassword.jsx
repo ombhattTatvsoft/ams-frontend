@@ -69,7 +69,7 @@ function ResetPassword() {
                 name='confirmPassword'
                 error={touched.confirmPassword && errors.confirmPassword}
               ></FormInput>
-              <FormButton className="w-100 sitebgcolor" type="submit">
+              <FormButton className="w-100 sitebgcolor mb-1" type="submit">
                 {!isValid ? "Sending..." : "Send"}
               </FormButton>
             </form>
