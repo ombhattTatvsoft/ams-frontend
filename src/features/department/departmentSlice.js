@@ -14,6 +14,30 @@ export const getDepartments = createAsyncThunk(
   }
 );
 
+// Async thunk for department list
+export const saveDepartment = createAsyncThunk(
+  "department/saveDepartment",
+  async (data,{ rejectWithValue }) => {
+    try {
+      return await departmentApi.SaveDepartment(data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+// Async thunk for department list
+export const deleteDepartment = createAsyncThunk(
+  "department/deleteDepartment",
+  async (data,{ rejectWithValue }) => {
+    try {
+      return await departmentApi.DeleteDepartment(data);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
 const departmentSlice = createSlice({
   name: "department",
   initialState: {
@@ -27,10 +51,14 @@ const departmentSlice = createSlice({
         state.loading = false;
         state.departments = action.payload.data
       })
-      .addMatcher(isAnyOf(getDepartments.pending), (state) => {
+      .addMatcher(isAnyOf(saveDepartment.fulfilled,deleteDepartment.fulfilled), (state,action) => {
+        state.loading = true;
+        toast.success(action.payload.message);
+      })
+      .addMatcher(isAnyOf(getDepartments.pending,saveDepartment.pending), (state) => {
         state.loading = true;
       })
-      .addMatcher(isAnyOf(getDepartments.rejected), (state, action) => {
+      .addMatcher(isAnyOf(getDepartments.rejected,saveDepartment.rejected), (state, action) => {
         state.loading = false;
         toast.error(action.payload.message);
       });

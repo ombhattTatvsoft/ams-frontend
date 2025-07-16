@@ -6,6 +6,7 @@ export const GENERAL = {
     FORBID : "Access Denied",
 
     // Schema speciifc
+    // auth schema
     EMAIL_SIZE : "Email must be 50 characters or less",
     EMAIL_VALID : "Enter a valid email",
     EMAIL_REQ : "Email is Required",
@@ -13,4 +14,9 @@ export const GENERAL = {
     PASSWORD_REQ : "Password is required",
     STRONG_PASSWORD : "Password must be at least 8 characters and include uppercase, lowercase, number, and special character",
     CONFIRM_PASSWORD_MATCH : "New password and confirm password does not match",
+
+    // department schema
+    DEPARTMENT_NAME_SIZE : "Department name must be 100 characters or less",
+    VALID_NAME : "Enter valid name",
+    NAME_REQ : "Name is Required",
 }

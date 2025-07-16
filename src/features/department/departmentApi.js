@@ -10,8 +10,7 @@ export const departmentApi = {
 
     GetDepartmentById:(id) =>
         baseApi.get({
-            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.GetDepartmentById,
-            params : id
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.GetDepartmentById + id,
         }),
 
     SaveDepartment:(data) =>
@@ -22,7 +21,6 @@ export const departmentApi = {
 
     DeleteDepartment:(id) => 
         baseApi.delete({
-            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.DeleteDepartment,
-            params : id
+            endPoint : PRIVATE_ROUTES.DEPARTMENT+DEPARTMENT_ENDPOINTS.DeleteDepartment + id,
         })
 }

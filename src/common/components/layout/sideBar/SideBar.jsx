@@ -42,6 +42,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
           boxSizing: 'border-box',
           top: '66px',
           transition: 'transform 0.75s ease',
+          zIndex:5
         }
       }}
     >

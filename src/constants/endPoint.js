@@ -1,6 +1,6 @@
 export const DEPARTMENT_ENDPOINTS = {
     GetDepartments : '/get-departments',
-    GetDepartmentById : '/get-department/:id',
+    GetDepartmentById : '/get-department/',
     SaveDepartment : '/save-department',
-    DeleteDepartment : '/delete-department/:id'
+    DeleteDepartment : '/delete-department/'
 }
