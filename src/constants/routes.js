@@ -9,7 +9,7 @@ export const PRIVATE_ROUTES = {
   DASHBOARD: "/dashboard",
   PROFILE: "/dashboard/profile",
   CHANGE_PASSWORD: "/dashboard/change-password",
-  USERS: "/users",
+  USERS: "/user",
   ATTENDANCE_SELF: "/attendance/self",
   ATTENDANCE_TEAM: "/attendance/team",
   LEAVE_TEAM: "/leave/team",

@@ -4,3 +4,7 @@ export const DEPARTMENT_ENDPOINTS = {
     SaveDepartment : '/save-department',
     DeleteDepartment : '/delete-department/'
 }
+
+export const USER_ENDPOINTS = {
+    GET_USERS : '/get-users',
+}

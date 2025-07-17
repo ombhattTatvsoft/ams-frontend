@@ -3,7 +3,7 @@ import PopUpModal from "../ui/PopUpModal";
 import warningIcon from "../../../assets/images/toppng.com-warning-icon-2400x2400.png";
 import FormButton from "../ui/FormButton";
 
-const DeleteModal = ({ showModal, setShowModal, entity ,onDelete}) => {
+const DeleteModal = ({ showModal, setShowModal, entity ,onClick}) => {
   const title="Delete Confirmation";
   const body = (
     <>
@@ -14,7 +14,7 @@ const DeleteModal = ({ showModal, setShowModal, entity ,onDelete}) => {
       <div className="d-flex justify-content-center gap-2 mt-4">
         <FormButton
           className="sitebgcolor mb-1"
-          onClick={onDelete}
+          onClick={onClick}
         >
           Yes
         </FormButton>

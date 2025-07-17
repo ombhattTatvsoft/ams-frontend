@@ -14,7 +14,7 @@ export const getDepartments = createAsyncThunk(
   }
 );
 
-// Async thunk for department list
+// Async thunk for add or update department
 export const saveDepartment = createAsyncThunk(
   "department/saveDepartment",
   async (data,{ rejectWithValue }) => {
@@ -26,7 +26,7 @@ export const saveDepartment = createAsyncThunk(
   }
 );
 
-// Async thunk for department list
+// Async thunk to delete department
 export const deleteDepartment = createAsyncThunk(
   "department/deleteDepartment",
   async (data,{ rejectWithValue }) => {
@@ -55,10 +55,10 @@ const departmentSlice = createSlice({
         state.loading = true;
         toast.success(action.payload.message);
       })
-      .addMatcher(isAnyOf(getDepartments.pending,saveDepartment.pending), (state) => {
+      .addMatcher(isAnyOf(getDepartments.pending,saveDepartment.pending,deleteDepartment.pending), (state) => {
         state.loading = true;
       })
-      .addMatcher(isAnyOf(getDepartments.rejected,saveDepartment.rejected), (state, action) => {
+      .addMatcher(isAnyOf(getDepartments.rejected,saveDepartment.rejected,deleteDepartment.rejected), (state, action) => {
         state.loading = false;
         toast.error(action.payload.message);
       });

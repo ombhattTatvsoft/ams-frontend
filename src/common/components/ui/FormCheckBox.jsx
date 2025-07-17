@@ -1,4 +1,3 @@
-import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
 
 function FormCheckBox({ checked = false, onChange, label, id, name }) {

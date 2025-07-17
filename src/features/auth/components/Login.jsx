@@ -9,6 +9,7 @@ import Loader from "../../../common/components/ui/Loader";
 import { Formik } from "formik";
 import { loginSchema } from "../authSchema";
 import FormLink from './../../../common/components/ui/FormLink';
+import FormSelect from "../../../common/components/ui/FormSelect";
 
 export default function Login() {
   const dispatch = useDispatch();

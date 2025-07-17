@@ -1,13 +1,15 @@
+const userDataKey = "user_data";
+
 export const getUserData = () => {
-  return JSON.parse(localStorage.getItem("user_data"));
+  return JSON.parse(localStorage.getItem(userDataKey));
 };
 
 export const setUserData = (userData) => {
-  localStorage.setItem("user_data", userData);
+  localStorage.setItem(userDataKey, userData);
 };
 
 export const removeUserData = () => {
-  localStorage.removeItem("user_data");
+  localStorage.removeItem(userDataKey);
 };
 
 export default {

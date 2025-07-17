@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <>
     <p className='h3 mb-4 text-danger'>Page Not Found</p>
-    <FormButton variant="contained" className='mb-3' onClick={()=>{navigate(-1)}}>
+    <FormButton className='mb-3 sitebgcolor' onClick={()=>{navigate(-1)}}>
         Go Back
     </FormButton>
     </>

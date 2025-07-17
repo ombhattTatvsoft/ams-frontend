@@ -4,9 +4,12 @@ import FormButton from "../../../common/components/ui/FormButton";
 import Loader from "../../../common/components/ui/Loader";
 import { deleteDepartment, getDepartments } from "../departmentSlice";
 import DataTable from "../../../common/components/ui/DataTable";
-import UpsertModal from "../../../common/components/modals/UpsertModal";
-import UpsertForm from "./UpsertForm";
+import DepartmentUpsertForm from "./DepartmentUpsertForm";
 import DeleteModal from "./../../../common/components/modals/DeleteModal";
+import PopUpModal from "../../../common/components/ui/PopUpModal";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 
 const Department = () => {
   const { loading, departments } = useSelector((state) => state.department);
@@ -37,14 +40,16 @@ const Department = () => {
         flex: 1,
         sortable: false,
         renderCell: (params) => (
-          <div className="d-flex gap-3">
+          <div className="d-flex">
             <a
               onClick={() => {
                 setEditData(params.row);
                 setShowUpsertModal(true);
               }}
             >
-              <i className="fa-solid fa-pen"></i>
+              <IconButton color="inherit" size="">
+                <EditIcon></EditIcon>
+              </IconButton>
             </a>
             <a
               onClick={() => {
@@ -52,7 +57,9 @@ const Department = () => {
                 setShowDeleteModal(true);
               }}
             >
-              <i className="fa-regular fa-trash-can"></i>
+              <IconButton color="inherit" size="">
+                <DeleteIcon fontSize="small"></DeleteIcon>
+              </IconButton>
             </a>
           </div>
         ),
@@ -60,14 +67,8 @@ const Department = () => {
     ];
   }, []);
 
-  const rows = departments.map((d) => ({
-    id: d.departmentId,
-    departmentName: d.departmentName,
-    userCount: d.userCount,
-  }));
-
   const form = (
-    <UpsertForm
+    <DepartmentUpsertForm
       editData={editData}
       setEditData={setEditData}
       setShowUpsertModal={setShowUpsertModal}
@@ -93,21 +94,24 @@ const Department = () => {
             </FormButton>
           </div>
           <div className="col-12 mt-3">
-            <DataTable columns={columns} rows={rows}></DataTable>
+            <DataTable columns={columns} rows={departments} rowId={(departments)=>departments.departmentId}></DataTable>
           </div>
         </div>
       </div>
-      <UpsertModal
+      {/* upsert modal */}
+      <PopUpModal
         showModal={showUpsertModal}
         setShowModal={setShowUpsertModal}
         title={entity}
         body={form}
-      ></UpsertModal>
+      ></PopUpModal>
+
+      {/* delete modal */}
       <DeleteModal
         showModal={showDeleteModal}
         setShowModal={setShowDeleteModal}
         entity={entity}
-        onDelete={() =>
+        onClick={() =>
           dispatch(deleteDepartment(editData.id)).then((action) => {
             if (action.meta.requestStatus == "fulfilled") {
               setShowDeleteModal(false);
