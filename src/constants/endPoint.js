@@ -6,5 +6,6 @@ export const DEPARTMENT_ENDPOINTS = {
 }
 
 export const USER_ENDPOINTS = {
+    GET_ROLES : '/get-roles',
     GET_USERS : '/get-users',
 }

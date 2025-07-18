@@ -7,4 +7,9 @@ export const userApi = {
     baseApi.get({
       endPoint: PRIVATE_ROUTES.USERS + USER_ENDPOINTS.GET_USERS,
     }),
+
+  GetRoles: () =>
+    baseApi.get({
+      endPoint: PRIVATE_ROUTES.USERS + USER_ENDPOINTS.GET_ROLES,
+    }),
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Paper } from "@mui/material";
 
-const DataTable = ({ rows, columns, rowId }) => {
+const DataTable = ({ rows, columns, rowId, defaultSort}) => {
   const paginationModel = { page: 0, pageSize: 10 };
   const sizeOptions = [5, 10, 25, { value: -1, label: "All" }];
   return (
@@ -14,7 +14,7 @@ const DataTable = ({ rows, columns, rowId }) => {
         className="rounded-3 px-3 py-1"
         rows={rows}
         columns={columns}
-        initialState={{ pagination: { paginationModel } }}
+        initialState={{ pagination: { paginationModel },sorting: { sortModel: [{ field: defaultSort, sort: "asc" }] } }}
         pageSizeOptions={sizeOptions}
         disableRowSelectionOnClick
         showToolbar

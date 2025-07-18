@@ -14,7 +14,7 @@ const DepartmentUpsertForm = ({
         setEditData={setEditData}
         setShowUpsertModal={setShowUpsertModal}
         initialValues={{
-          departmentId: editData?.id || 0,
+          departmentId: editData?.departmentId || 0,
           departmentName: editData?.departmentName || "",
         }}
         validationSchema={departmentSchema}

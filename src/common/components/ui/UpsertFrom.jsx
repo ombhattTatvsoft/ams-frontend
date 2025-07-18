@@ -13,6 +13,7 @@ const UpsertForm = ({
   fetchAction,
   fields,
   confirmButtonText,
+  handleChange
 }) => {
   const dispatch = useDispatch();
 
@@ -34,7 +35,7 @@ const UpsertForm = ({
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           {fields.map((field) => (
-            <DynamicInput key={field.name} field={field} />
+            <DynamicInput key={field.name} field={field} handleChange={handleChange}/>
           ))}
           <div className="d-flex justify-content-end gap-2 mt-3">
             <FormButton className="sitebgcolor mb-1" type="submit">

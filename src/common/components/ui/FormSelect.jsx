@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import React from "react";
 
-const FormSelect = ({ value, onChange, label, id, error, name, options }) => {
+const FormSelect = ({ value, onChange, label, id, error, name, options, handleChange }) => {
   return (
     <>
       <FormControl fullWidth sx={{ marginBottom: "1rem" }} error={!!error}>
@@ -16,7 +16,10 @@ const FormSelect = ({ value, onChange, label, id, error, name, options }) => {
           name={name}
           value={value}
           label={label}
-          onChange={onChange}
+          onChange={(event) => {
+            if (onChange) onChange(event);
+            if (handleChange) handleChange(event);
+          }}
         >
           {options.map((option) => (
             <MenuItem value={option.value} key={option.value}>

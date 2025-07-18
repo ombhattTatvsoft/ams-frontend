@@ -19,4 +19,9 @@ export const GENERAL = {
     DEPARTMENT_NAME_SIZE : "Department name must be 100 characters or less",
     VALID_NAME : "Enter valid name",
     NAME_REQ : "Name is Required",
+
+    // user schema
+    NAME_SIZE : "Name must be 50 characters or less",
+    ROLE_REQ : "Role is Required",
+    DEPT_REQ : "Department is Required",
 }

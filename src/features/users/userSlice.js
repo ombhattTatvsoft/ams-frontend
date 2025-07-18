@@ -14,11 +14,26 @@ export const getUsers = createAsyncThunk(
   }
 );
 
+// Async thunk for roles list
+export const getRoles = createAsyncThunk(
+  "user/getRoles",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await userApi.GetRoles();
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
     loading: false,
     users: [],
+    roles: []
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -27,10 +42,13 @@ const userSlice = createSlice({
         state.loading = false;
         state.users = action.payload.data;
       })
+      .addCase(getRoles.fulfilled, (state, action) => {
+        state.roles = action.payload.data;
+      })
       .addMatcher(isAnyOf(getUsers.pending), (state) => {
         state.loading = true;
       })
-      .addMatcher(isAnyOf(getUsers.rejected), (state, action) => {
+      .addMatcher(isAnyOf(getUsers.rejected,getRoles.rejected), (state, action) => {
         state.loading = false;
         toast.error(action.payload.message);
       });

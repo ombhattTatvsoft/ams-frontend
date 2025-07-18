@@ -8,7 +8,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 import PopUpModal from "../../../common/components/ui/PopUpModal";
-import UserUpsertForm from './UserUpsertForm';
+import UserUpsertForm from "./UserUpsertForm";
+import { ROLES } from "./../../../constants/roles";
 
 const User = () => {
   const { loading, users } = useSelector((state) => state.user);
@@ -19,8 +20,10 @@ const User = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+    if (users.length === 0) {
+      dispatch(getUsers());
+    }
+  }, [dispatch, users.length]);
 
   const columns = useMemo(() => {
     return [
@@ -34,30 +37,31 @@ const User = () => {
         headerName: "Actions",
         flex: 1,
         sortable: false,
-        renderCell: () => (
-          <div className="d-flex">
-            <a
-              onClick={() => {
-                // setEditData(params.row);
-                // setShowUpsertModal(true);
-              }}
-            >
-              <IconButton color="inherit" size="">
-                <EditIcon></EditIcon>
-              </IconButton>
-            </a>
-            <a
-              onClick={() => {
-                // setEditData(params.row);
-                // setShowDeleteModal(true);
-              }}
-            >
-              <IconButton color="inherit" size="">
-                <DeleteIcon fontSize="small"></DeleteIcon>
-              </IconButton>
-            </a>
-          </div>
-        ),
+        renderCell: (params) =>
+          params.row.roleName !== ROLES.ADMIN && (
+            <div className="d-flex">
+              <a
+                onClick={() => {
+                  setEditData(params.row);
+                  setShowUpsertModal(true);
+                }}
+              >
+                <IconButton color="inherit" size="">
+                  <EditIcon></EditIcon>
+                </IconButton>
+              </a>
+              <a
+                onClick={() => {
+                  // setEditData(params.row);
+                  // setShowDeleteModal(true);
+                }}
+              >
+                <IconButton color="inherit" size="">
+                  <DeleteIcon fontSize="small"></DeleteIcon>
+                </IconButton>
+              </a>
+            </div>
+          ),
       },
     ];
   }, []);
@@ -93,6 +97,7 @@ const User = () => {
               columns={columns}
               rows={users}
               rowId={(users) => users.userId}
+              defaultSort="name"
             ></DataTable>
           </div>
         </div>

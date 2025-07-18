@@ -20,8 +20,10 @@ const Department = () => {
   const entity = "Department";
 
   useEffect(() => {
-    dispatch(getDepartments());
-  }, [dispatch]);
+    if (departments.length === 0) {
+      dispatch(getDepartments());
+    }
+  }, [dispatch, departments.length]);
 
   const columns = useMemo(() => {
     return [
@@ -94,7 +96,11 @@ const Department = () => {
             </FormButton>
           </div>
           <div className="col-12 mt-3">
-            <DataTable columns={columns} rows={departments} rowId={(departments)=>departments.departmentId}></DataTable>
+            <DataTable
+              columns={columns}
+              rows={departments}
+              rowId={(departments) => departments.departmentId}
+            ></DataTable>
           </div>
         </div>
       </div>
@@ -112,7 +118,7 @@ const Department = () => {
         setShowModal={setShowDeleteModal}
         entity={entity}
         onClick={() =>
-          dispatch(deleteDepartment(editData.id)).then((action) => {
+          dispatch(deleteDepartment(editData.departmentId)).then((action) => {
             if (action.meta.requestStatus == "fulfilled") {
               setShowDeleteModal(false);
               setEditData(null);

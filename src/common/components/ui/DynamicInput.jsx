@@ -6,7 +6,7 @@ import FormCheckBox from './FormCheckBox';
 import FormDatePicker from './FormDatePicker';
 import FormTextarea from './FormTextarea';
 
-function DynamicInput({ field }) {
+function DynamicInput({ field, handleChange }) {
   const [formikField, meta] = useField(field.name);
   const error = meta.touched && meta.error;
 
@@ -26,7 +26,7 @@ function DynamicInput({ field }) {
       return <FormInput {...commonProps} type={field.type}/>;
 
     case "select":
-      return <FormSelect {...commonProps} options={field.options || []}/>;
+      return <FormSelect {...commonProps} options={field.options || []} handleChange={handleChange}/>;
 
     case "checkbox":
       return (
