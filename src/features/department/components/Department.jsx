@@ -69,18 +69,16 @@ const Department = () => {
     ];
   }, []);
 
-  const form = (
+  const form = useMemo(()=>(
     <DepartmentUpsertForm
       editData={editData}
-      setEditData={setEditData}
-      setShowUpsertModal={setShowUpsertModal}
+      goBack={() => setShowUpsertModal(false)}
     />
-  );
-
-  if (loading) return <Loader />;
+  ),[editData]);
 
   return (
     <>
+    {loading && <Loader />}
       <div className="content">
         <div className="row">
           <div className="col-12 d-flex justify-content-between align-items-center">
@@ -119,9 +117,8 @@ const Department = () => {
         entity={entity}
         onClick={() =>
           dispatch(deleteDepartment(editData.departmentId)).then((action) => {
-            if (action.meta.requestStatus == "fulfilled") {
+            if (action.meta.requestStatus === "fulfilled") {
               setShowDeleteModal(false);
-              setEditData(null);
               dispatch(getDepartments());
             }
           })

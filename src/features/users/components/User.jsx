@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import FormButton from "../../../common/components/ui/FormButton";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../userSlice";
+import { deleteUser, getUsers } from "../userSlice";
 import Loader from "../../../common/components/ui/Loader";
 import DataTable from "../../../common/components/ui/DataTable";
 import EditIcon from "@mui/icons-material/Edit";
@@ -10,11 +10,13 @@ import { IconButton } from "@mui/material";
 import PopUpModal from "../../../common/components/ui/PopUpModal";
 import UserUpsertForm from "./UserUpsertForm";
 import { ROLES } from "./../../../constants/roles";
+import DeleteModal from "../../../common/components/modals/DeleteModal";
 
 const User = () => {
   const { loading, users } = useSelector((state) => state.user);
   const [showUpsertModal, setShowUpsertModal] = useState(false);
   const [editData, setEditData] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const entity = "User";
 
   const dispatch = useDispatch();
@@ -52,8 +54,8 @@ const User = () => {
               </a>
               <a
                 onClick={() => {
-                  // setEditData(params.row);
-                  // setShowDeleteModal(true);
+                  setEditData(params.row);
+                  setShowDeleteModal(true);
                 }}
               >
                 <IconButton color="inherit" size="">
@@ -66,18 +68,16 @@ const User = () => {
     ];
   }, []);
 
-  const form = (
+  const form = useMemo(() => (
     <UserUpsertForm
       editData={editData}
-      setEditData={setEditData}
-      setShowUpsertModal={setShowUpsertModal}
+      goBack={() => setShowUpsertModal(false)}
     />
-  );
-
-  if (loading) return <Loader />;
+  ),[editData]);
 
   return (
     <>
+      {loading && <Loader />}
       <div className="content">
         <div className="row">
           <div className="col-12 d-flex justify-content-between align-items-center">
@@ -109,6 +109,21 @@ const User = () => {
         title={entity}
         body={form}
       ></PopUpModal>
+      {/* delete modal */}
+      <DeleteModal
+        showModal={showDeleteModal}
+        setShowModal={setShowDeleteModal}
+        entity={entity}
+        onClick={() =>
+          dispatch(deleteUser(editData.userId)).then((action) => {
+            if (action.meta.requestStatus === "fulfilled") {
+              setShowDeleteModal(false);
+              dispatch(getUsers());
+            }
+          })
+        }
+      >
+      </DeleteModal>
     </>
   );
 };

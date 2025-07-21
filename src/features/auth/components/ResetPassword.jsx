@@ -60,6 +60,7 @@ function ResetPassword() {
                 label="New Password"
                 name='newPassword'
                 error={touched.newPassword && errors.newPassword}
+                isPassword={true}
               ></FormInput>
               <FormInput
                 type="password"
@@ -68,6 +69,7 @@ function ResetPassword() {
                 label="Confirm New Password"
                 name='confirmPassword'
                 error={touched.confirmPassword && errors.confirmPassword}
+                isPassword={true}
               ></FormInput>
               <FormButton className="w-100 sitebgcolor mb-1" type="submit">
                 {!isValid ? "Sending..." : "Send"}

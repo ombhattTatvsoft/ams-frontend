@@ -12,4 +12,15 @@ export const userApi = {
     baseApi.get({
       endPoint: PRIVATE_ROUTES.USERS + USER_ENDPOINTS.GET_ROLES,
     }),
+
+  SaveUser: (userData) => 
+    baseApi.post({
+      endPoint: PRIVATE_ROUTES.USERS + USER_ENDPOINTS.SAVE_USER,
+      data: userData,
+    }),
+  
+  DeleteUser: (userId) => 
+    baseApi.delete({
+      endPoint: PRIVATE_ROUTES.USERS + USER_ENDPOINTS.DELETE_USER + userId,
+    })
 };

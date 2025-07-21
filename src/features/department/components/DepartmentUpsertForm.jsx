@@ -5,14 +5,12 @@ import UpsertForm from "../../../common/components/ui/UpsertFrom";
 
 const DepartmentUpsertForm = ({
   editData,
-  setEditData,
-  setShowUpsertModal,
+  goBack,
 }) => {
   return (
     <>
       <UpsertForm
-        setEditData={setEditData}
-        setShowUpsertModal={setShowUpsertModal}
+        goBack={goBack}
         initialValues={{
           departmentId: editData?.departmentId || 0,
           departmentName: editData?.departmentName || "",

@@ -52,7 +52,7 @@ const departmentSlice = createSlice({
         state.departments = action.payload.data
       })
       .addMatcher(isAnyOf(saveDepartment.fulfilled,deleteDepartment.fulfilled), (state,action) => {
-        state.loading = true;
+        state.loading = false;
         toast.success(action.payload.message);
       })
       .addMatcher(isAnyOf(getDepartments.pending,saveDepartment.pending,deleteDepartment.pending), (state) => {

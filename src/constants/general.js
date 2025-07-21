@@ -24,4 +24,5 @@ export const GENERAL = {
     NAME_SIZE : "Name must be 50 characters or less",
     ROLE_REQ : "Role is Required",
     DEPT_REQ : "Department is Required",
+    MANAGER_REQ : "Manager is Required",
 }

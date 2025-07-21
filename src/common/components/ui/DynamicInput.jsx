@@ -23,7 +23,7 @@ function DynamicInput({ field, handleChange }) {
     case "text":
     case "email":
     case "password":
-      return <FormInput {...commonProps} type={field.type}/>;
+      return <FormInput {...commonProps} type={field.type} handleChange={handleChange}/>;
 
     case "select":
       return <FormSelect {...commonProps} options={field.options || []} handleChange={handleChange}/>;

@@ -5,15 +5,14 @@ import { useDispatch } from "react-redux";
 import DynamicInput from "./DynamicInput";
 
 const UpsertForm = ({
-  setEditData,
-  setShowUpsertModal,
+  goBack,
   initialValues,
   validationSchema,
   saveAction,
   fetchAction,
   fields,
   confirmButtonText,
-  handleChange
+  handleChange,
 }) => {
   const dispatch = useDispatch();
 
@@ -25,8 +24,7 @@ const UpsertForm = ({
       onSubmit={(values) => {
         dispatch(saveAction(values)).then((action) => {
           if (action.meta.requestStatus === "fulfilled") {
-            setShowUpsertModal(false);
-            setEditData(null);
+            goBack();
             if (fetchAction) dispatch(fetchAction());
           }
         });
@@ -35,19 +33,17 @@ const UpsertForm = ({
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
           {fields.map((field) => (
-            <DynamicInput key={field.name} field={field} handleChange={handleChange}/>
+            <DynamicInput
+              key={field.name}
+              field={field}
+              handleChange={handleChange}
+            />
           ))}
           <div className="d-flex justify-content-end gap-2 mt-3">
             <FormButton className="sitebgcolor mb-1" type="submit">
               {confirmButtonText}
             </FormButton>
-            <FormButton
-              className="siteoutlinebtn mb-1"
-              onClick={() => {
-                setShowUpsertModal(false);
-                setEditData(null);
-              }}
-            >
+            <FormButton className="siteoutlinebtn mb-1" onClick={goBack}>
               Cancel
             </FormButton>
           </div>

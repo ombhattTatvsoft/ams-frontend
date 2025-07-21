@@ -15,11 +15,11 @@ export const userSchema = Yup.object().shape({
       GENERAL.EMAIL_VALID
     )
     .required(GENERAL.EMAIL_REQ),
-  roleId: Yup.number().required(GENERAL.ROLE_REQ),
-  departmentId: Yup.number().required(GENERAL.DEPT_REQ),
+  roleId: Yup.number().min(2, GENERAL.ROLE_REQ),
+  departmentId: Yup.number().min(1, GENERAL.DEPT_REQ),
   managerId: Yup.number().when("roleId", {
     is: (val) => val !== 2,
-    then: () => Yup.number().required(GENERAL.MANAGER_REQ),
+    then: () => Yup.number().min(1, GENERAL.MANAGER_REQ),
     otherwise: () => Yup.number().notRequired(),
   }),
 });
