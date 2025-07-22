@@ -10,7 +10,7 @@ import ResetPassword from "../features/auth/components/ResetPassword";
 import NotFound from "../common/components/error/NotFound";
 import User from "../features/users/components/User";
 import Profile from "../features/dashboard/components/Profile";
-import ChangePassword from './../features/dashboard/components/ChangePassword';
+import ChangePassword from "./../features/dashboard/components/ChangePassword";
 import Department from "../features/department/components/department";
 
 export default function AppRoutes() {
@@ -32,14 +32,15 @@ export default function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path={PRIVATE_ROUTES.DASHBOARD} element={<Dashboard />} />
           <Route path={PRIVATE_ROUTES.PROFILE} element={<Profile />} />
-          <Route path={PRIVATE_ROUTES.CHANGE_PASSWORD} element={<ChangePassword />} />
+          <Route
+            path={PRIVATE_ROUTES.CHANGE_PASSWORD}
+            element={<ChangePassword />}
+          />
           <Route path={PRIVATE_ROUTES.USERS} element={<User />} />
           <Route path={PRIVATE_ROUTES.DEPARTMENT} element={<Department />} />
         </Route>
       </Route>
-      <Route element={<AuthLayout />}>
-        <Route path="*" element={<NotFound />} />
-      </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

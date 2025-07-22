@@ -32,14 +32,17 @@ const UpsertForm = ({
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          {fields.map((field) => (
-            <DynamicInput
-              key={field.name}
-              field={field}
-              handleChange={handleChange}
-            />
-          ))}
-          <div className="d-flex justify-content-end gap-2 mt-3">
+          <div className="row">
+            {fields.map((field) => (
+              <div className={`${field.className}`} key={field.name}>
+                <DynamicInput
+                  field={field}
+                  handleChange={handleChange}
+                />
+              </div>
+            ))}
+          </div>
+          <div className="d-flex justify-content-end gap-2">
             <FormButton className="sitebgcolor mb-1" type="submit">
               {confirmButtonText}
             </FormButton>

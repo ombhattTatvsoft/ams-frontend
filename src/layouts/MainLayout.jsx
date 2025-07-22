@@ -21,10 +21,10 @@ function MainLayout() {
       <SideBar open={open} drawerWidth={drawerWidth}></SideBar>
       <Box
         component="main"
-        className="p-4"
+        className={isMobile? "py-4 px-3" : "p-4" } 
         sx={{
           marginLeft: !isMobile && open ? `${drawerWidth}px` : 0,
-          transition: 'margin-left 0.3s ease',
+          transition: 'margin-left 0.2s ease',
         }}
       >
         <Outlet />

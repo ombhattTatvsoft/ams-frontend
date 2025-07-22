@@ -29,16 +29,17 @@ const User = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: "name", headerName: "Name", flex: 1 },
-      { field: "email", headerName: "Email", flex: 1 },
-      { field: "roleName", headerName: "Role", flex: 1 },
-      { field: "managerName", headerName: "Reports to", flex: 1 },
-      { field: "departmentName", headerName: "Department", flex: 1 },
+      { field: "name", headerName: "Name", flex: 1, minWidth: 150 },
+      { field: "email", headerName: "Email", flex: 1, minWidth: 200},
+      { field: "roleName", headerName: "Role", flex: 1, minWidth: 150},
+      { field: "managerName", headerName: "Reports to", flex: 1, minWidth: 150},
+      { field: "departmentName", headerName: "Department", flex: 1, minWidth: 150},
       {
         field: "id",
         headerName: "Actions",
         flex: 1,
         sortable: false,
+        minWidth: 120,
         renderCell: (params) =>
           params.row.roleName !== ROLES.ADMIN && (
             <div className="d-flex">

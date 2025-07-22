@@ -25,4 +25,7 @@ export const GENERAL = {
     ROLE_REQ : "Role is Required",
     DEPT_REQ : "Department is Required",
     MANAGER_REQ : "Manager is Required",
+
+    // dashboard schema
+    PASSWORD_NOT_SAME : "New password cannot be same as current password",
 }

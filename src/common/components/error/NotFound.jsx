@@ -1,17 +1,22 @@
-import React from 'react'
-import FormButton from '../ui/FormButton'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import FormButton from "../ui/FormButton";
+import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <>
-    <p className='h3 mb-4 text-danger'>Page Not Found</p>
-    <FormButton className='mb-3 sitebgcolor' onClick={()=>{navigate(-1)}}>
+    <div className="vh-100 d-flex flex-column justify-content-center align-items-center">
+      <p className="h2 mb-4 text-danger">Page Not Found</p>
+      <FormButton
+        className="mb-3 sitebgcolor"
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
         Go Back
-    </FormButton>
-    </>
-  )
-}
+      </FormButton>
+    </div>
+  );
+};
 
-export default NotFound
+export default NotFound;

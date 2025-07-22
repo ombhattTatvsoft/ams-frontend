@@ -1,4 +1,4 @@
-import baseApi from "../../common/API/BaseAPI";
+import baseApi from "../../common/api/baseApi";
 import { DEPARTMENT_ENDPOINTS } from "../../constants/endPoint";
 import { PRIVATE_ROUTES } from "../../constants/routes";
 

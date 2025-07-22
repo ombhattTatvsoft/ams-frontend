@@ -41,6 +41,7 @@ const Department = () => {
         headerName: "Actions",
         flex: 1,
         sortable: false,
+        minWidth: 100,
         renderCell: (params) => (
           <div className="d-flex">
             <a
@@ -124,7 +125,7 @@ const Department = () => {
           })
         }
       ></DeleteModal>
-    </>
+    </> 
   );
 };
 

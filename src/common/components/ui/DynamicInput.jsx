@@ -13,9 +13,7 @@ function DynamicInput({ field, handleChange }) {
   const commonProps = {
     value: formikField.value,
     onChange: formikField.onChange,
-    label: field.label,
-    id: field.name,
-    name: field.name,
+    ...field,
     error,
   };
 
@@ -23,10 +21,10 @@ function DynamicInput({ field, handleChange }) {
     case "text":
     case "email":
     case "password":
-      return <FormInput {...commonProps} type={field.type} handleChange={handleChange}/>;
+      return <FormInput {...commonProps} handleChange={handleChange}/>;
 
     case "select":
-      return <FormSelect {...commonProps} options={field.options || []} handleChange={handleChange}/>;
+      return <FormSelect {...commonProps} handleChange={handleChange}/>;
 
     case "checkbox":
       return (

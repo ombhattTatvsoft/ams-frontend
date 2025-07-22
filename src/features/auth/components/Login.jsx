@@ -49,7 +49,7 @@ export default function Login() {
                 label="Password"
                 error={touched.password && errors.password}
               ></FormInput>
-              <div className="d-flex justify-content-between">
+              <div className="d-flex justify-content-between mb-3">
                 <FormCheckBox
                   id="loginRememberMe"
                   name="rememberme"

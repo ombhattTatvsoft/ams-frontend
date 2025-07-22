@@ -6,7 +6,7 @@ export const userSchema = Yup.object().shape({
   name: Yup.string()
     .max(50, GENERAL.NAME_SIZE)
     .matches(/^[A-Za-z]+(?:\s[A-Za-z]+)*$/, GENERAL.VALID_NAME)
-    .required(GENERAL.NAME_REQ),
+    .required(GENERAL.NAME_REQ).trim(),
   email: Yup.string()
     .max(50, GENERAL.EMAIL_SIZE)
     .email(GENERAL.EMAIL_VALID)
@@ -14,12 +14,12 @@ export const userSchema = Yup.object().shape({
       /^[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       GENERAL.EMAIL_VALID
     )
-    .required(GENERAL.EMAIL_REQ),
+    .required(GENERAL.EMAIL_REQ).trim().lowercase(),
   roleId: Yup.number().min(2, GENERAL.ROLE_REQ),
   departmentId: Yup.number().min(1, GENERAL.DEPT_REQ),
   managerId: Yup.number().when("roleId", {
     is: (val) => val !== 2,
-    then: () => Yup.number().min(1, GENERAL.MANAGER_REQ),
-    otherwise: () => Yup.number().notRequired(),
+    then: (schema) => schema.min(1, GENERAL.MANAGER_REQ),
+    otherwise: (schema) => schema.notRequired(),
   }),
 });

@@ -38,9 +38,9 @@ function ForgotPassword() {
                 label="Email"
                 error={touched.email && errors.email}
               ></FormInput>
-              <div className="d-flex justify-content-between align-items-center">
+              <div className="d-flex justify-content-between align-items-center mb-1">
                 <FormLink to={PUBLIC_ROUTES.LOGIN}>Back to login</FormLink>
-                <FormButton className="sitebgcolor mb-1" type="submit">
+                <FormButton className="sitebgcolor" type="submit">
                   {loading ? "Sending..." : "Send"}
                 </FormButton>
               </div>

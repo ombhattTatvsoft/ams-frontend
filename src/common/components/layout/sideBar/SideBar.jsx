@@ -14,6 +14,7 @@ import { getUserData } from '../../../../utils/manageUserData';
 import { PRIVATE_ROUTES } from '../../../../constants/routes';
 
 import './SideBar.css'
+import { ROLES } from '../../../../constants/roles';
 
 function PersistentClippedDrawer({ open, drawerWidth }) {
   const [attendanceOpen, setAttendanceOpen] = useState(false);
@@ -60,7 +61,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
         </ListItem>
 
         {/* Users (Admin only) */}
-        {role === 'Admin' && (
+        {role === ROLES.ADMIN && (
           <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.USERS ? 'active-option':'sidebar-option'}>
             <ListItemButton component={Link} to={PRIVATE_ROUTES.USERS} >
               <ListItemIcon className='sidebar-icon'><PeopleIcon className='a'/></ListItemIcon>
@@ -70,7 +71,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
         )}
 
         {/* Attendance */}
-        {role === 'Admin' ? (
+        {role === ROLES.ADMIN ? (
           <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.ATTENDANCE_TEAM ? 'active-option':'sidebar-option'}>
             <ListItemButton component={Link} to={PRIVATE_ROUTES.ATTENDANCE_TEAM} >
               <ListItemIcon className='sidebar-icon'><EventAvailableIcon className='a'/></ListItemIcon>
@@ -111,7 +112,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
         )}
 
         {/* Leave */}
-        {role === 'Admin' ? (
+        {role === ROLES.ADMIN ? (
           <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.LEAVE_TEAM ? 'active-option':'sidebar-option'}>
             <ListItemButton component={Link} to={PRIVATE_ROUTES.LEAVE_TEAM} >
               <ListItemIcon className='sidebar-icon'><AssignmentIcon className='a'/></ListItemIcon>
@@ -160,7 +161,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
         </ListItem>
 
         {/* Department (Admin only) */}
-        {role === 'Admin' && (
+        {role === ROLES.ADMIN && (
           <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.DEPARTMENT ? 'active-option':'sidebar-option'}>
             <ListItemButton component={Link} to={PRIVATE_ROUTES.DEPARTMENT} >
               <ListItemIcon className='sidebar-icon'><BusinessIcon className='a'/></ListItemIcon>
@@ -170,7 +171,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
         )}
 
         {/* Report & Analytics (Admin, SeniorManager, Manager) */}
-        {(role === 'Admin' || role === 'SeniorManager' || role === 'Manager') && (
+        {(role === ROLES.ADMIN || role === ROLES.SEN_MANAGER || role === ROLES.MANAGER) && (
           <ListItem disablePadding className={location.pathname==PRIVATE_ROUTES.REPORT_ANALYTICS ? 'active-option':'sidebar-option'}>
             <ListItemButton component={Link} to={PRIVATE_ROUTES.REPORT_ANALYTICS} >
               <ListItemIcon className='sidebar-icon'><AnalyticsIcon className='a'/></ListItemIcon>

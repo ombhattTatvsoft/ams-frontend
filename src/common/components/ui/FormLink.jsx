@@ -3,7 +3,7 @@ import Link from "@mui/material/Link";
 
 const FormLink = ({ to, children }) => {
   return (
-    <Link href={to} underline="hover" sx={{marginBottom:"1rem"}}>
+    <Link href={to} underline="hover">
       {children}
     </Link>
   );

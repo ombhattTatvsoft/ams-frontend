@@ -1,5 +1,5 @@
 import { PUBLIC_ROUTES } from "../../constants/routes";
-import baseApi from "../../common/API/BaseAPI";
+import baseApi from "../../common/api/baseApi";
 
 const authApi = {
   login: (credentials) =>

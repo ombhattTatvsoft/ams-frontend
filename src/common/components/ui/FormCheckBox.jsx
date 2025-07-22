@@ -2,7 +2,7 @@ import { Checkbox, FormControlLabel } from "@mui/material";
 
 function FormCheckBox({ checked = false, onChange, label, id, name }) {
   return (
-    <FormControlLabel sx={{marginBottom:"1rem"}}
+    <FormControlLabel
       control={
         <Checkbox
           sx={{paddingY:"0"}}

@@ -12,3 +12,7 @@ export const USER_ENDPOINTS = {
     SAVE_USER : '/save-user',
     DELETE_USER : "/delete-user/",
 }
+
+export const DASHBOARD_ENDPOINTS = {
+    CHANGE_PASSWORD: '/change-password',
+}

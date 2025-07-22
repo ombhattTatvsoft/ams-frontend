@@ -13,7 +13,8 @@ function FormInput({
   error,
   name,
   isPassword = false,
-  handleChange
+  handleChange,
+  ...props
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,6 +25,7 @@ function FormInput({
   return (
     <div className="mb-3">
       <TextField
+        {...props}
         id={id}
         name={name}
         type={type}
