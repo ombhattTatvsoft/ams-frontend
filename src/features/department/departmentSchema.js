@@ -6,7 +6,6 @@ export const departmentSchema = Yup.object().shape({
   departmentName: Yup.string()
     .max(100, GENERAL.DEPARTMENT_NAME_SIZE)
     .matches(/^[A-Za-z]+(?:\s[A-Za-z]+)*$/, GENERAL.VALID_NAME)
-    .required(GENERAL.NAME_REQ)
-    .trim(),
+    .required(GENERAL.NAME_REQ),
 });
 

@@ -43,7 +43,7 @@ function ProfileDropdown() {
       <DropdownMenu id="profile-menu" anchorEl={anchorEl} handleClose={handleClose} open={open}>
         <MenuItem disabled>
           <Typography color="text.primary">
-            {user.name} ({user.role})
+            {user.name} ({user.roleName})
           </Typography>
         </MenuItem>
         <Divider sx={{ my: 0.5 }} />

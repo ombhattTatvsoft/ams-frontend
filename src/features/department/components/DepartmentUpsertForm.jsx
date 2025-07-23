@@ -2,11 +2,13 @@ import React from "react";
 import { departmentSchema } from "../departmentSchema";
 import { getDepartments, saveDepartment } from "../departmentSlice";
 import UpsertForm from "../../../common/components/ui/UpsertFrom";
+import { useDispatch } from "react-redux";
 
 const DepartmentUpsertForm = ({
   editData,
   goBack,
 }) => {
+  const dispatch = useDispatch();
   return (
     <>
       <UpsertForm
@@ -17,7 +19,10 @@ const DepartmentUpsertForm = ({
         }}
         validationSchema={departmentSchema}
         saveAction={saveDepartment}
-        fetchAction={getDepartments}
+        onSuccess={() => {
+          goBack();
+          dispatch(getDepartments());
+        }}
         fields={[
           { name: "departmentName", label: "Name", type: "text" },  
         ]}

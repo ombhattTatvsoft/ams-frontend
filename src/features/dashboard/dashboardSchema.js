@@ -24,8 +24,7 @@ export const profileSchema = Yup.object().shape({
   name: Yup.string()
     .max(50, GENERAL.NAME_SIZE)
     .matches(/^[A-Za-z]+(?:\s[A-Za-z]+)*$/, GENERAL.VALID_NAME)
-    .required(GENERAL.NAME_REQ)
-    .trim(),
+    .required(GENERAL.NAME_REQ),
   email: Yup.string()
     .max(50, GENERAL.EMAIL_SIZE)
     .email(GENERAL.EMAIL_VALID)
@@ -34,6 +33,4 @@ export const profileSchema = Yup.object().shape({
       GENERAL.EMAIL_VALID
     )
     .required(GENERAL.EMAIL_REQ)
-    .trim()
-    .lowercase(),
 });

@@ -8,7 +8,7 @@ export const loginSchema = Yup.object().shape({
       /^[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       GENERAL.EMAIL_VALID
     )
-    .required(GENERAL.EMAIL_REQ).trim().lowercase(),
+    .required(GENERAL.EMAIL_REQ),
   password: Yup.string()
     .max(50, GENERAL.PASSWORD_SIZE)
     .required(GENERAL.PASSWORD_REQ),
@@ -22,7 +22,7 @@ export const forgotPasswordSchema = Yup.object().shape({
       /^[a-z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       GENERAL.EMAIL_VALID
     )
-    .required(GENERAL.EMAIL_REQ).trim().lowercase(),
+    .required(GENERAL.EMAIL_REQ),
 });
 
 export const resetPasswordSchema = Yup.object().shape({

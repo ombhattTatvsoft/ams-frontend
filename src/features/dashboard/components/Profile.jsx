@@ -4,7 +4,7 @@ import { Avatar } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, saveUser } from "../../users/userSlice";
 import Loader from "./../../../common/components/ui/Loader";
-import { getUserData } from "../../../utils/manageUserData";
+import { getUserData, setUserData } from "../../../utils/manageUserData";
 import UpsertForm from "./../../../common/components/ui/UpsertFrom";
 import { navigateTo } from "../../../common/utils/navigate";
 import dayjs from "dayjs";
@@ -16,8 +16,8 @@ const Profile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUser(localUser.id));
-  }, [dispatch, localUser.id]);
+    dispatch(getUser(localUser.userId));
+  }, [dispatch, localUser.userId]);
 
   return (
     <>
@@ -49,6 +49,9 @@ const Profile = () => {
                 </div>
                 <UpsertForm
                   goBack={() => navigateTo(-1)}
+                  onSuccess={(values) => {
+                    setUserData(JSON.stringify(values));
+                  }}
                   initialValues={user}
                   validationSchema={profileSchema}
                   saveAction={saveUser}

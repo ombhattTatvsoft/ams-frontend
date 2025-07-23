@@ -9,10 +9,10 @@ const UpsertForm = ({
   initialValues,
   validationSchema,
   saveAction,
-  fetchAction,
   fields,
   confirmButtonText,
   handleChange,
+  onSuccess,
 }) => {
   const dispatch = useDispatch();
 
@@ -24,8 +24,7 @@ const UpsertForm = ({
       onSubmit={(values) => {
         dispatch(saveAction(values)).then((action) => {
           if (action.meta.requestStatus === "fulfilled") {
-            goBack();
-            if (fetchAction) dispatch(fetchAction());
+            onSuccess && onSuccess(values);
           }
         });
       }}

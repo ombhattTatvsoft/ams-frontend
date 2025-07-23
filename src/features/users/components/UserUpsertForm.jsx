@@ -113,7 +113,10 @@ const UserUpsertForm = ({ editData, goBack }) => {
         }}
         validationSchema={userSchema}
         saveAction={saveUser}
-        fetchAction={getUsers}
+        onSuccess={() => {
+          goBack();
+          dispatch(getUsers());
+        }}
         fields={formFields}
         confirmButtonText={!editData ? "Add" : "Update"}
       ></UpsertForm>

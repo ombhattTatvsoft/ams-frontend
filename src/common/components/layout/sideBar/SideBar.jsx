@@ -20,7 +20,7 @@ function PersistentClippedDrawer({ open, drawerWidth }) {
   const [attendanceOpen, setAttendanceOpen] = useState(false);
   const [leaveOpen, setLeaveOpen] = useState(false);
   const user = getUserData();
-  const role = user.role;
+  const role = user.roleName;
   const hasTeam = true;
   const location = useLocation();
 
