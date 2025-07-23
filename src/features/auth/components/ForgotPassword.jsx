@@ -1,17 +1,20 @@
-import React from "react";
-import FormInput from "../../../common/components/ui/FormInput";
-import FormButton from "../../../common/components/ui/FormButton";
+import React, { useMemo } from "react";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../../../constants/routes";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { forgotPassword } from "../authSlice";
 import Loader from "../../../common/components/ui/Loader";
-import { Formik } from "formik";
 import { forgotPasswordSchema } from "../authSchema";
-import FormLink from "../../../common/components/ui/FormLink";
+import UpsertForm from "../../../common/components/ui/UpsertForm";
+import { createButton, createInputField, createLink } from "../../../common/utils/formFieldGenerator";
 
 function ForgotPassword() {
-  const dispatch = useDispatch();
   const { isAuthenticated, loading } = useSelector((state) => state.auth);
+
+  const formFields = useMemo(() => [
+    createInputField({name:"email",label:"Email",type:"email"}),
+    createLink({name:"backToLogin",to:PUBLIC_ROUTES.LOGIN,label:"Back to login",containerClassName:"col-6"}),
+    createButton({name:"sendButton",type:"submit",containerClassName:"col-6 d-flex justify-content-end mb-1",className:"sitebgcolor",label:"Send"})
+  ],[]);
 
   if (isAuthenticated) return <Navigate to={PRIVATE_ROUTES.DASHBOARD} />;
 
@@ -23,30 +26,14 @@ function ForgotPassword() {
         <p className="text-muted">
           Enter you email and we'll send you a link to reset your password.
         </p>
-        <Formik
+        <UpsertForm
           initialValues={{ email: "" }}
           validationSchema={forgotPasswordSchema}
-          onSubmit={(values) => dispatch(forgotPassword(values))}
+          saveAction={forgotPassword}
+          fields={formFields}
+          showFooter={false}
         >
-          {({ values, errors, handleChange, handleSubmit, touched }) => (
-            <form onSubmit={handleSubmit}>
-              <FormInput
-                type="email"
-                value={values.email}
-                name="email"
-                onChange={handleChange}
-                label="Email"
-                error={touched.email && errors.email}
-              ></FormInput>
-              <div className="d-flex justify-content-between align-items-center mb-1">
-                <FormLink to={PUBLIC_ROUTES.LOGIN}>Back to login</FormLink>
-                <FormButton className="sitebgcolor" type="submit">
-                  {loading ? "Sending..." : "Send"}
-                </FormButton>
-              </div>
-            </form>
-          )}
-        </Formik>
+        </UpsertForm>
       </div>
     </>
   );

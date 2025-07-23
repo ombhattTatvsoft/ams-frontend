@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import FormButton from "../../../common/components/ui/FormButton";
+import FormButton from "./FormButton";
 import { useDispatch } from "react-redux";
 import DynamicInput from "./DynamicInput";
 
@@ -13,6 +13,7 @@ const UpsertForm = ({
   confirmButtonText,
   handleChange,
   onSuccess,
+  showFooter = true,
 }) => {
   const dispatch = useDispatch();
 
@@ -33,22 +34,21 @@ const UpsertForm = ({
         <form onSubmit={handleSubmit}>
           <div className="row">
             {fields.map((field) => (
-              <div className={`${field.className}`} key={field.name}>
-                <DynamicInput
-                  field={field}
-                  handleChange={handleChange}
-                />
+              <div className={`${field.containerClassName}`} key={field.name}>
+                <DynamicInput field={field} handleChange={handleChange} />
               </div>
             ))}
           </div>
-          <div className="d-flex justify-content-end gap-2">
-            <FormButton className="sitebgcolor mb-1" type="submit">
-              {confirmButtonText}
-            </FormButton>
-            <FormButton className="siteoutlinebtn mb-1" onClick={goBack}>
-              Cancel
-            </FormButton>
-          </div>
+          {showFooter && (
+            <div className="d-flex justify-content-end gap-2">
+              <FormButton className="sitebgcolor mb-1" type="submit">
+                {confirmButtonText}
+              </FormButton>
+              <FormButton className="siteoutlinebtn mb-1" onClick={goBack}>
+                Cancel
+              </FormButton>
+            </div>
+          )}
         </form>
       )}
     </Formik>

@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-function FormButton({ className = "", children, disabled = false, ...props }) {
+function FormButton({ className = "", children, type, onClick, name }) {
   return (
     <Button
-      className={`${className}`}
-      disabled={disabled}
-      {...props}
+      name={name}
+      className={className}
+      type={type}
+      onClick={onClick}
     >
       {children}
     </Button>

@@ -1,12 +1,11 @@
 import { Checkbox, FormControlLabel } from "@mui/material";
 
-function FormCheckBox({ checked = false, onChange, label, id, name }) {
+function FormCheckBox({ checked = false, onChange, label, name }) {
   return (
-    <FormControlLabel
+    <FormControlLabel 
       control={
         <Checkbox
           sx={{paddingY:"0"}}
-          id={id}
           name={name}
           checked={checked}
           onChange={onChange}

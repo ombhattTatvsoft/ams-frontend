@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "../../../constants/routes";
-import FormInput from "../../../common/components/ui/FormInput";
-import FormButton from "../../../common/components/ui/FormButton";
 import { resetPassword } from "../authSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../../common/components/ui/Loader";
 import { toast } from "react-toastify";
 import authApi from "../authApi";
-import { Formik } from "formik";
 import { resetPasswordSchema } from "../authSchema";
+import { createButton, createInputField } from "../../../common/utils/formFieldGenerator";
+import UpsertForm from "../../../common/components/ui/UpsertForm";
 
 function ResetPassword() {
   const { resetcode } = useParams();
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(null);
-  const dispatch = useDispatch();
   const { isAuthenticated } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -35,6 +33,13 @@ function ResetPassword() {
     validateResetCode();
   }, [navigate, resetcode]);
 
+  const formFields = useMemo(() => [
+      createInputField({name:"newPassword",label:"New Password",isPassword:true}),
+      createInputField({name:"confirmPassword",label:"Confirm New Password",isPassword:true}),
+      createButton({name:"sendButton",type:"submit",className:"w-100 sitebgcolor",label:"Send"})
+    ],[]);
+  
+
   if (isAuthenticated) return <Navigate to={PRIVATE_ROUTES.DASHBOARD} />;
 
   return (
@@ -42,41 +47,17 @@ function ResetPassword() {
       {!isValid && <Loader />}
       <h3 className="mb-4">Reset Password</h3>
       <div className="col-10 mb-3">
-        <Formik
+        <UpsertForm
           initialValues={{
             resetCode: resetcode,
             newPassword: "",
             confirmPassword: "",
           }}
           validationSchema={resetPasswordSchema}
-          onSubmit={(values) => dispatch(resetPassword(values))}
-        >
-          {({ values, errors, handleSubmit, handleChange, touched }) => (
-            <form onSubmit={handleSubmit}>
-              <FormInput
-                type="password"
-                value={values.newPassword}
-                onChange={handleChange}
-                label="New Password"
-                name='newPassword'
-                error={touched.newPassword && errors.newPassword}
-                isPassword={true}
-              ></FormInput>
-              <FormInput
-                type="password"
-                value={values.confirmPassword}
-                onChange={handleChange}
-                label="Confirm New Password"
-                name='confirmPassword'
-                error={touched.confirmPassword && errors.confirmPassword}
-                isPassword={true}
-              ></FormInput>
-              <FormButton className="w-100 sitebgcolor mb-1" type="submit">
-                {!isValid ? "Sending..." : "Send"}
-              </FormButton>
-            </form>
-          )}
-        </Formik>
+          saveAction={resetPassword}
+          fields={formFields}
+          showFooter={false}
+        ></UpsertForm>
       </div>
     </>
   );

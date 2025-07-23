@@ -5,16 +5,16 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 function FormInput({
+  name,
+  label,
   type = "text",
+  isPassword = false,
+  disabled = false,
   value,
   onChange,
-  label,
-  id,
   error,
-  name,
-  isPassword = false,
   handleChange,
-  ...props
+  className="",
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -25,8 +25,8 @@ function FormInput({
   return (
     <div className="mb-3">
       <TextField
-        {...props}
-        id={id}
+        className={className}
+        disabled={disabled}
         name={name}
         type={type}
         label={label}

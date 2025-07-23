@@ -1,12 +1,14 @@
 import React from "react";
 import { navigateTo } from "../../../common/utils/navigate";
-import UpsertForm from "../../../common/components/ui/UpsertFrom";
+import UpsertForm from "../../../common/components/ui/UpsertForm";
 import { changePasswordSchema } from './../dashboardSchema';
 import { changePassword } from './../dashboardSlice';
 import { getUserData } from "../../../utils/manageUserData";
+import { createInputField } from './../../../common/utils/formFieldGenerator';
 
 const ChangePassword = () => {
   const user = getUserData();
+
   return (
     <div>
       <div className="content">
@@ -27,24 +29,9 @@ const ChangePassword = () => {
               validationSchema={changePasswordSchema}
               saveAction={changePassword}
               fields={[
-                {
-                  name: "currentPassword",
-                  label: "Current Password",
-                  type: "password",
-                  isPassword: true,
-                },
-                {
-                  name: "newPassword",
-                  label: "New Password",
-                  type: "password",
-                  isPassword: true,
-                },
-                {
-                  name: "confirmNewPassword",
-                  label: "Confirm New Password",
-                  type: "password",
-                  isPassword: true,
-                },
+                createInputField({name:"currentPassword",label: "Current Password",isPassword: true}),
+                createInputField({name:"newPassword",label: "New Password",isPassword: true}),
+                createInputField({name:"confirmNewPassword",label: "Confirm New Password",isPassword: true}),
               ]}
               confirmButtonText={"Submit"}
             ></UpsertForm>

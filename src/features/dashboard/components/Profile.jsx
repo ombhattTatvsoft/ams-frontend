@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser, saveUser } from "../../users/userSlice";
 import Loader from "./../../../common/components/ui/Loader";
 import { getUserData, setUserData } from "../../../utils/manageUserData";
-import UpsertForm from "./../../../common/components/ui/UpsertFrom";
+import UpsertForm from "./../../../common/components/ui/UpsertForm";
 import { navigateTo } from "../../../common/utils/navigate";
 import dayjs from "dayjs";
 import { profileSchema } from "../../dashboard/dashboardSchema";
+import { createInputField } from "../../../common/utils/formFieldGenerator";
 
 const Profile = () => {
   const localUser = getUserData();
@@ -18,7 +19,7 @@ const Profile = () => {
   useEffect(() => {
     dispatch(getUser(localUser.userId));
   }, [dispatch, localUser.userId]);
-
+    
   return (
     <>
       {loading && <Loader />}
@@ -56,46 +57,17 @@ const Profile = () => {
                   validationSchema={profileSchema}
                   saveAction={saveUser}
                   fields={[
-                    {
-                      name: "name",
-                      label: "Name",
-                      type: "text",
-                      className: "col-md-6",
-                    },
-                    {
-                      name: "email",
-                      label: "Email",
-                      type: "email",
-                      className: "col-md-6",
-                    },
-                    {
-                      name: "roleName",
-                      label: "Role",
-                      type: "text",
-                      className: "col-md-6",
-                      disabled: true,
-                    },
+                    createInputField({name:"name",label: "Name",containerClassName: "col-md-6"}),
+                    createInputField({name:"email",label: "Email",type:"email",containerClassName: "col-md-6"}),
+                    createInputField({name:"roleName",label: "Role",disabled:true,containerClassName: "col-md-6"}),
                     ...(user.managerName
                       ? [
-                          {
-                            name: "managerName",
-                            label: "Reports to",
-                            type: "text",
-                            className: "col-md-6",
-                            disabled: true,
-                          },
+                          createInputField({name:"managerName",label: "Reports to",disabled:true,containerClassName: "col-md-6"}),
                         ]
                       : []),
                     ...(user.departmentName
                       ? [
-                          {
-                            name: "departmentName",
-                            label: "Department",
-                            type: "text",
-                            className: "col-md-6",
-                            disabled: true,
-                          },
-                        ]
+                          createInputField({name:"departmentName",label: "Department",disabled:true,containerClassName: "col-md-6"}),                        ]
                       : []),
                   ]}
                   confirmButtonText={"Submit"}

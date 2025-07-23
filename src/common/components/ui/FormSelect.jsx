@@ -6,23 +6,22 @@ import Select from "@mui/material/Select";
 import React from "react";
 
 const FormSelect = ({
+  name,
+  label,
+  options,
   value,
   onChange,
-  label,
-  id,
   error,
-  name,
-  options,
   handleChange,
 }) => {
   return (
     <>
       <div className="mb-3"> 
         <FormControl fullWidth error={!!error}>
-          <InputLabel id={`${id}-label`}>{label}</InputLabel>
+          <InputLabel id={`${name}-label`}>{label}</InputLabel>
           <Select
-            labelId={`${id}-label`}
-            id={id}
+            labelId={`${name}-label`}
+            id={name}
             name={name}
             value={value}
             label={label}

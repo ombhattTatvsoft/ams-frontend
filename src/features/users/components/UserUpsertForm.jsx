@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import UpsertForm from "../../../common/components/ui/UpsertFrom";
+import UpsertForm from "../../../common/components/ui/UpsertForm";
 import { getRoles, getUsers, saveUser } from "../userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getDepartments } from "../../department/departmentSlice";
 import { ROLES } from "../../../constants/roles";
-import { userSchema } from "./../userSchema";
+import { userSchema } from "../userSchema";
+import { createInputField, createSelectDropdown } from "../../../common/utils/formFieldGenerator";
 
 const UserUpsertForm = ({ editData, goBack }) => {
   const { departments } = useSelector((state) => state.department);
@@ -74,28 +75,13 @@ const UserUpsertForm = ({ editData, goBack }) => {
 
   const formFields = useMemo(
     () => [
-      { name: "name", label: "Name", type: "text" },
-      { name: "email", label: "Email", type: "email" },
-      {
-        name: "departmentId",
-        label: "Department",
-        type: "select",
-        options: deptOptions || [],
-      },
-      {
-        name: "roleId",
-        label: "Role",
-        type: "select",
-        options: roleOptions || [],
-      },
+      createInputField({name:"name",label: "Name"}),
+      createInputField({name:"email",label: "Email",type:"email"}),
+      createSelectDropdown({name:"departmentId",label: "Department",options:deptOptions || []}),
+      createSelectDropdown({name:"roleId",label: "Role",options:roleOptions || []}),
       ...(formData.roleId !== 2
         ? [
-            {
-              name: "managerId",
-              label: "Reports to",
-              type: "select",
-              options: managerOptions || [],
-            },
+            createSelectDropdown({name:"managerId",label: "Reports to",options:managerOptions || []}),
           ]
         : []),
     ],
