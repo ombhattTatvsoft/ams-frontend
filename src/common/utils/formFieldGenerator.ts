@@ -9,6 +9,8 @@ interface FormField {
   isPassword?: boolean;
   options?: selectOption[];
   to?: string; // For link type
+  minDate?: Date;
+  maxDate?: Date;
 }
 
 export const createInputField = ({
@@ -121,5 +123,33 @@ export const createButton = ({
     type,
     containerClassName,
     className,
+  };
+};
+
+export const createDatePicker = ({
+  name,
+  label,
+  type = "datepicker",
+  containerClassName = "",
+  className = "",
+  minDate,
+  maxDate,
+}: {
+  name: string;
+  label: string;
+  type?: string;
+  containerClassName?: string;
+  className?: string;
+  minDate?: Date;
+  maxDate?: Date;
+}): FormField => {
+  return {
+    name,
+    label,
+    type,
+    containerClassName,
+    className,
+    minDate,
+    maxDate,
   };
 };

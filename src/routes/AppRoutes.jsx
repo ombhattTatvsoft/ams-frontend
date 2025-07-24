@@ -12,6 +12,7 @@ import User from "../features/users/components/User";
 import Profile from "../features/dashboard/components/Profile";
 import ChangePassword from "./../features/dashboard/components/ChangePassword";
 import Department from "../features/department/components/department";
+import Holiday from "../features/holiday/components/holiday";
 
 export default function AppRoutes() {
   return (
@@ -38,6 +39,7 @@ export default function AppRoutes() {
           />
           <Route path={PRIVATE_ROUTES.USERS} element={<User />} />
           <Route path={PRIVATE_ROUTES.DEPARTMENT} element={<Department />} />
+          <Route path={PRIVATE_ROUTES.HOLIDAY} element={<Holiday />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

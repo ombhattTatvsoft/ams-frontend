@@ -29,9 +29,9 @@ export const saveDepartment = createAsyncThunk(
 // Async thunk to delete department
 export const deleteDepartment = createAsyncThunk(
   "department/deleteDepartment",
-  async (data,{ rejectWithValue }) => {
+  async (id,{ rejectWithValue }) => {
     try {
-      return await departmentApi.DeleteDepartment(data);
+      return await departmentApi.DeleteDepartment(id);
     } catch (err) {
       return rejectWithValue(err);
     }

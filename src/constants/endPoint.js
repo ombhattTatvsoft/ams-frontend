@@ -16,3 +16,10 @@ export const USER_ENDPOINTS = {
 export const DASHBOARD_ENDPOINTS = {
     CHANGE_PASSWORD: '/change-password',
 }
+
+export const HOLIDAY_ENDPOINTS = {
+    GetHolidays : '/get-holidays',
+    GetHolidayById : '/get-holiday/',
+    SaveHoliday : '/save-holiday',
+    DeleteHoliday : '/delete-holiday/'
+}

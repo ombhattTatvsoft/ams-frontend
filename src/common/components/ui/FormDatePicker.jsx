@@ -1,25 +1,36 @@
 import React from "react";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { FormHelperText } from '@mui/material';
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { FormHelperText } from "@mui/material";
 import dayjs from "dayjs";
 
-const FormDatePicker = ({ value, onChange, label, id, name, error}) => {
+const FormDatePicker = ({
+  value,
+  onChange,
+  label,
+  name,
+  error,
+  className,
+  minDate,
+  maxDate,
+}) => {
   return (
     <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <DatePicker 
+        <DatePicker
+          minDate={minDate}
+          maxDate={maxDate}
+          className={className}
           label={label}
           value={value ? dayjs(value) : null}
           onChange={(date) =>
             onChange({
-              target: { name, value: date ? date.toISOString() : null },
+              target: { name, value: date ? dayjs(date).format("YYYY-MM-DD") : null },
             })
           }
           slotProps={{
             textField: {
-              id,
               name,
               fullWidth: true,
               margin: "dense",

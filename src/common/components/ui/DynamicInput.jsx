@@ -48,6 +48,7 @@ function DynamicInput({ field, handleChange }) {
 
     case "button":
     case "submit":
+    case "reset":
       return <FormButton {...field} children={field.label}/>;
 
     default:
